@@ -19,3 +19,16 @@ def get_last_transactions(list_, last_transactions):
     return sorted_list
 
 
+def encode_data(bill_info):
+    bill_info = bill_info.split()
+    bill = bill_info[-1]
+    info = ' '.join(bill_info[:-1])
+    if len(bill) == 16:
+        bill = f'{bill[:4]} {bill[4:6]}** ****{bill[-4:]}'
+    else:
+        bill = f'**{bill[-4:]}'
+
+    to = f'{info} {bill}'
+    return to
+
+
