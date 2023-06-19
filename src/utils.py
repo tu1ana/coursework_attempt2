@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from operator import itemgetter
 
 
@@ -32,3 +33,27 @@ def encode_data(bill_info):
     return to
 
 
+def display_data(list_):
+    formatted_data = []
+    for el in list_:
+        date_obj = datetime.strptime(el['date'], '%Y-%m-%dT%H:%M:%S.%f')
+        new_date = date_obj.strftime('%d.%m.%Y')
+        print(new_date)
+
+        description = el['description']
+        print(description)
+
+        if 'from' in el:
+            sender = encode_data(el['from'])
+            sender = f'{sender} -> '
+        else:
+            sender = ''
+
+        to = encode_data(el['to'])
+        operation_amt = f"{el['operationAmount']['amount']} {el['operationAmount']['currency']['name']}"
+
+        formatted_data.append((f'''\
+{new_date} {description}
+{sender}{to}
+{operation_amt}'''))
+    return formatted_data
