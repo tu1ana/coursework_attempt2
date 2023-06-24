@@ -10,20 +10,20 @@ def load_operations():
         return operations
 
 
-def get_exec_transaction(list_):
+def get_exec_transaction(list_: list):
     """Сортирует данные, возвращает список только выполненных операций"""
     sorted_list = [x for x in list_ if 'state' in x and x['state'] == 'EXECUTED']
     return sorted_list
 
 
-def get_last_transactions(list_, last_transactions):
+def get_last_transactions(list_: list, last_transactions: int):
     """Сортирует список по дате"""
     sorted_list = sorted(list_, key=itemgetter('date'), reverse=True)
     sorted_list = sorted_list[:last_transactions]
     return sorted_list
 
 
-def encode_data(bill_info):
+def encode_data(bill_info: str):
     """Зашифровывает платёжные данные"""
     bill_info = bill_info.split()
     bill = bill_info[-1]
@@ -37,7 +37,7 @@ def encode_data(bill_info):
     return to
 
 
-def display_data(list_):
+def display_data(list_: list):
     """Выводит информацию по операциям следующего вида:
     '14.10.2018 Перевод организации
     Visa Platinum 7000 79** **** 6361 -> Счет **9638
